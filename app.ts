@@ -8,10 +8,6 @@ import {setCorsHeaders} from "./src/middleware";
 const app = express();
 const port = appConfig.appPort;
 
-app.listen(port, () => {
-    console.log(`Timezones by location application is running on port ${port}.`);
-});
-
 app.use(setCorsHeaders);
 
 app.get('/prices/:currency', async (req, res) => {
@@ -45,3 +41,9 @@ app.get('/prices/:currency', async (req, res) => {
     console.log(results);
     res.status(200).json(transformer.transformResult(results));
 })
+
+app.listen(port, () => {
+    console.log(`Timezones by location application is running on port ${port}.`);
+});
+
+module.exports = app;
