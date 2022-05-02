@@ -1,0 +1,1 @@
+export type ApiBitfinexResult = Array<number>
