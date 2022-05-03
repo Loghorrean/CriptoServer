@@ -2,7 +2,7 @@ import {IApiResponse} from "./IApiResponse";
 
 export interface ApiKucoinResult extends IApiResponse {
     data: {
-        price: number
+        price: string
     }
     exchange: "kucoin"
 }

@@ -4,7 +4,7 @@ export interface ApiCoinbaseResult extends IApiResponse {
     data: {
         base: string
         currency: string
-        amount: number
+        amount: string
     }
     exchange: "coinbase"
 }

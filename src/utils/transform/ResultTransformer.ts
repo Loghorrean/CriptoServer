@@ -24,50 +24,52 @@ export class ResultTransformer {
     }
 
     private transformKrakenResult(apiKrakenResult: ApiKrakenResult): Money {
+        const money = parseFloat(apiKrakenResult.result.XXBTZUSD.a[0]);
         return {
-            price: apiKrakenResult.result.XXBTZUSD.a[0]
+            price: parseFloat(money.toFixed(2))
         }
     }
 
     private transformFtxResult(apiFtxResult: ApiFtxResult): Money {
         return {
-            price: apiFtxResult.result.price
+            price: parseFloat(apiFtxResult.result.price.toFixed(2))
         }
     }
 
     private transformCoinbaseResult(apiCoinbaseResult: ApiCoinbaseResult): Money {
         return {
-            price: apiCoinbaseResult.data.amount,
+            price: parseFloat(parseFloat(apiCoinbaseResult.data.amount).toFixed(2))
         }
     }
 
     private transformKucoinResult(apiKucoinResult: ApiKucoinResult): Money {
         return {
-            price: apiKucoinResult.data.price
+            price: parseFloat(parseFloat(apiKucoinResult.data.price).toFixed(2))
         }
     }
 
     private transformBinanceResult(apiBinanceResult: ApiBinanceResult): Money {
         return {
-            price: apiBinanceResult.price
+            price: parseFloat(parseFloat(apiBinanceResult.price).toFixed(2))
         }
     }
 
     private transformHuobiResult(apiHuobiResult: ApiHuobiResult): Money {
         return {
-            price: apiHuobiResult.tick.data["0"].price
+            price: parseFloat(apiHuobiResult.tick.data["0"].price.toFixed(2))
         }
     }
 
     private transformBitfinexResult(apiResult: ApiBitfinexResult): Money {
+        const money = apiResult[2] as number;
         return {
-            price: apiResult[2] // This is such a piece of shit api
+            price: parseFloat(money.toFixed(2)) // This is such a piece of shit api
         }
     }
 
     private transformGeminiResult(apiResult: ApiGeminiResult): Money {
         return {
-            price: apiResult.bid
+            price: parseFloat(parseFloat(apiResult.bid).toFixed(2))
         }
     }
 }

@@ -1,5 +1,5 @@
 export interface ApiGeminiResult {
     symbol: string,
-    bid: number,
+    bid: string,
     ask: number
 }
