@@ -1,12 +1,12 @@
 import * as results from "../types";
 
 export interface ApiDataResponse {
-    readonly binance: results.ApiBinanceResult
-    readonly kraken: results.ApiKrakenResult
-    readonly ftx: results.ApiFtxResult
-    readonly coinbase: results.ApiCoinbaseResult
-    readonly kucoin: results.ApiKucoinResult
-    readonly huobi: results.ApiHuobiResult
-    readonly bitfinex: results.ApiBitfinexResult
-    readonly gemini: results.ApiGeminiResult
+    readonly binance: results.ApiBinanceResult | void
+    readonly kraken: results.ApiKrakenResult | void
+    readonly ftx: results.ApiFtxResult | void
+    readonly coinbase: results.ApiCoinbaseResult | void
+    readonly kucoin: results.ApiKucoinResult | void
+    readonly huobi: results.ApiHuobiResult | void
+    readonly bitfinex: results.ApiBitfinexResult | void
+    readonly gemini: results.ApiGeminiResult | void
 }

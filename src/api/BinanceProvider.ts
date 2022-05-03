@@ -5,7 +5,11 @@ export class BinanceProvider {
     constructor(private readonly client: ApiClientInterface)
     {}
 
-    public getBinanceResult(symbol: string): Promise<ApiBinanceResult> {
-        return this.client.get("", {symbol});
+    public async getBinanceResult(symbol: string): Promise<ApiBinanceResult|void> {
+        return this.client.get("", {symbol}).catch(() => {
+            return new Promise<void>((res) => {
+                res()
+            });
+        });
     }
 }

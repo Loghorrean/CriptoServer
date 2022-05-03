@@ -39,6 +39,7 @@ export class ApiClient implements ApiClientInterface {
     }
 
     private handleError(error) {
+        console.log(error);
         throw error;
     }
 }

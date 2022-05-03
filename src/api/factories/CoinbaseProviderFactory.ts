@@ -1,15 +1,17 @@
 import {Headers} from "../types";
-import {ApiClientFactory} from "./clients/ApiClientFactory";
+import {ApiClientFactory} from "./clients";
 import {CoinbaseProvider} from "../CoinbaseProvider";
+import {ApiClientFactoryInterface, RacingApiClientFactory} from "./clients";
 
 export class CoinbaseProviderFactory {
-    private apiClientFactory: ApiClientFactory;
+    private apiClientFactory: ApiClientFactoryInterface;
 
     constructor(baseUrl: string, headers: Headers = {}) {
         this.apiClientFactory = new ApiClientFactory(
             `${baseUrl}/v2/prices/`,
             headers
         );
+        this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);
     }
 
     createCoinbaseProvider(): CoinbaseProvider {

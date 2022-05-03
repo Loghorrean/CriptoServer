@@ -1,12 +1,16 @@
 import {ApiHuobiResult} from "./types";
-import {ApiClient} from "./clients";
+import {ApiClient, ApiClientInterface} from "./clients";
 
 export class HuobiProvider {
     constructor (
-        private readonly apiClient: ApiClient
+        private readonly apiClient: ApiClientInterface
     ) {}
 
     getHuobiResult(symbol: string): Promise<ApiHuobiResult> {
-        return this.apiClient.get("", {symbol: symbol});
+        return this.apiClient.get("", {symbol: symbol}).catch(() => {
+            return new Promise<void>((res) => {
+                res();
+            });
+        });
     }
 }

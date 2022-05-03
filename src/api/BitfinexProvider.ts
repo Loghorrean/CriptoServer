@@ -1,11 +1,15 @@
 import {ApiClientInterface} from "./clients";
-import {ApiBitfinexResult} from "./types/api/ApiBitfinexResult";
+import {ApiBitfinexResult} from "./types";
 
 export class BitfinexProvider {
     constructor(private readonly apiClient: ApiClientInterface) {
     }
 
-    public getBitfinexResult(symbol: string): Promise<ApiBitfinexResult> {
-        return this.apiClient.get(`/${symbol}`);
+    public getBitfinexResult(symbol: string): Promise<ApiBitfinexResult | void> {
+        return this.apiClient.get(`/${symbol}`).catch(() => {
+            return new Promise<void>((res) => {
+                res();
+            });
+        });
     }
 }

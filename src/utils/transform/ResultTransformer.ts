@@ -12,64 +12,96 @@ import {ApiCoinbaseResult} from "../../api";
 export class ResultTransformer {
     public transformResult(apiDataResponse: ApiDataResponse): DataResponse {
         return {
-            kraken: this.transformKrakenResult(apiDataResponse.kraken),
-            ftx: this.transformFtxResult(apiDataResponse.ftx),
-            binance: this.transformBinanceResult(apiDataResponse.binance),
-            coinbase: this.transformCoinbaseResult(apiDataResponse.coinbase),
-            kucoin: this.transformKucoinResult(apiDataResponse.kucoin),
-            huobi: this.transformHuobiResult(apiDataResponse.huobi),
-            bitfinex: this.transformBitfinexResult(apiDataResponse.bitfinex),
-            gemini: this.transformGeminiResult(apiDataResponse.gemini)
+            kraken: ResultTransformer.transformKrakenResult(apiDataResponse.kraken),
+            ftx: ResultTransformer.transformFtxResult(apiDataResponse.ftx),
+            binance: ResultTransformer.transformBinanceResult(apiDataResponse.binance),
+            coinbase: ResultTransformer.transformCoinbaseResult(apiDataResponse.coinbase),
+            kucoin: ResultTransformer.transformKucoinResult(apiDataResponse.kucoin),
+            huobi: ResultTransformer.transformHuobiResult(apiDataResponse.huobi),
+            bitfinex: ResultTransformer.transformBitfinexResult(apiDataResponse.bitfinex),
+            gemini: ResultTransformer.transformGeminiResult(apiDataResponse.gemini)
         }
     }
 
-    private transformKrakenResult(apiKrakenResult: ApiKrakenResult): Money {
+    private static transformKrakenResult(apiKrakenResult: ApiKrakenResult | void): Money {
+        if (!apiKrakenResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         const money = parseFloat(apiKrakenResult.result.XXBTZUSD.a[0]);
         return {
             sell: parseFloat(money.toFixed(2))
         }
     }
 
-    private transformFtxResult(apiFtxResult: ApiFtxResult): Money {
+    private static transformFtxResult(apiFtxResult: ApiFtxResult | void): Money {
+        if (!apiFtxResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(apiFtxResult.result.price.toFixed(2))
         }
     }
 
-    private transformCoinbaseResult(apiCoinbaseResult: ApiCoinbaseResult): Money {
+    private static transformCoinbaseResult(apiCoinbaseResult: ApiCoinbaseResult | void): Money {
+        if (!apiCoinbaseResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(parseFloat(apiCoinbaseResult.data.amount).toFixed(2))
         }
     }
 
-    private transformKucoinResult(apiKucoinResult: ApiKucoinResult): Money {
+    private static transformKucoinResult(apiKucoinResult: ApiKucoinResult | void): Money {
+        if (!apiKucoinResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(parseFloat(apiKucoinResult.data.price).toFixed(2))
         }
     }
 
-    private transformBinanceResult(apiBinanceResult: ApiBinanceResult): Money {
+    private static transformBinanceResult(apiBinanceResult: ApiBinanceResult | void): Money {
+        if (!apiBinanceResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(parseFloat(apiBinanceResult.price).toFixed(2))
         }
     }
 
-    private transformHuobiResult(apiHuobiResult: ApiHuobiResult): Money {
+    private static transformHuobiResult(apiHuobiResult: ApiHuobiResult | void): Money {
+        if (!apiHuobiResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(apiHuobiResult.tick.data["0"].price.toFixed(2))
         }
     }
 
-    private transformBitfinexResult(apiResult: ApiBitfinexResult): Money {
+    private static transformBitfinexResult(apiResult: ApiBitfinexResult | void): Money {
+        if (!apiResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         const money = apiResult[2] as number;
         return {
             sell: parseFloat(money.toFixed(2)) // This is such a piece of shit api
         }
     }
 
-    private transformGeminiResult(apiResult: ApiGeminiResult): Money {
+    private static transformGeminiResult(apiResult: ApiGeminiResult | void): Money {
+        if (!apiResult) {
+            return ResultTransformer.getErroredMoney();
+        }
         return {
             sell: parseFloat(parseFloat(apiResult.bid).toFixed(2))
+        }
+    }
+
+    private static getErroredMoney(): Money {
+        return {
+            sell: 0,
+            buy: 0,
+            spot: 0
         }
     }
 }

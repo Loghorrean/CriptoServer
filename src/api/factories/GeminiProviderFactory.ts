@@ -1,5 +1,5 @@
 import {Headers} from "../types";
-import {ApiClientFactory, ApiClientFactoryInterface} from "./clients";
+import {ApiClientFactory, ApiClientFactoryInterface, RacingApiClientFactory} from "./clients";
 import {GeminiProvider} from "../GeminiProvider";
 
 export class GeminiProviderFactory {
@@ -10,6 +10,7 @@ export class GeminiProviderFactory {
             `${baseUrl}/v2/ticker`,
             headers
         );
+        this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);
     }
 
     public createGeminiProvider(): GeminiProvider {

@@ -1,15 +1,17 @@
 import {Headers} from "../types";
-import {ApiClientFactory} from "./clients/ApiClientFactory";
+import {ApiClientFactory, RacingApiClientFactory} from "./clients";
 import {FtxProvider} from "../FtxProvider";
+import {ApiClientFactoryInterface} from "./clients";
 
 export class FtxProviderFactory {
-    private apiClientFactory: ApiClientFactory
+    private apiClientFactory: ApiClientFactoryInterface
 
     constructor(baseUrl: string, headers: Headers) {
         this.apiClientFactory = new ApiClientFactory(
             `${baseUrl}/api/markets/`,
             headers
         );
+        this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);
     }
 
     public createFtxProvider(): FtxProvider {
