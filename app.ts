@@ -43,7 +43,7 @@ app.get('/prices/:currency', async (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Timezones by location application is running on port ${port}.`);
+    console.log(`Timezones by locatn application is running on port ${port}.`);
 });
 
 module.exports = app;
