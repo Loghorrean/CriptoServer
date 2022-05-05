@@ -8,7 +8,7 @@ export class KucoinProviderFactory {
 
     constructor(baseUrl: string, headers: Headers = {}) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/api/v1/market/orderbook/level1`,
+            `${baseUrl}/api/v1`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

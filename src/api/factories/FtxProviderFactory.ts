@@ -8,7 +8,7 @@ export class FtxProviderFactory {
 
     constructor(baseUrl: string, headers: Headers) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/api/markets/`,
+            `${baseUrl}/api`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

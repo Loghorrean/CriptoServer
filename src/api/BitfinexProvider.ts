@@ -6,7 +6,7 @@ export class BitfinexProvider {
     }
 
     public getBitfinexResult(symbol: string): Promise<ApiBitfinexResult | void> {
-        return this.apiClient.get(`/${symbol}`).catch(() => {
+        return this.apiClient.get(`/ticker/${symbol}`).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

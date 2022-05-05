@@ -6,7 +6,7 @@ export class GeminiProvider {
     }
 
     public getGeminiResult(symbol: string): Promise<ApiGeminiResult> {
-        return this.apiClient.get(`/${symbol}`).catch(() => {
+        return this.apiClient.get(`/ticker/${symbol}`).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

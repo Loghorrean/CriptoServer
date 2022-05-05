@@ -8,7 +8,7 @@ export class BinanceProviderFactory {
 
     constructor(baseUrl: string, headers: Headers = {}) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/api/v3/ticker/price`,
+            `${baseUrl}/api/v3`,
             headers
         )
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

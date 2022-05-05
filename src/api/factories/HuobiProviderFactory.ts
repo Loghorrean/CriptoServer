@@ -8,7 +8,7 @@ export class HuobiProviderFactory {
 
     constructor(baseUrl: string, headers: Headers = {}) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/market/trade`,
+            `${baseUrl}`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

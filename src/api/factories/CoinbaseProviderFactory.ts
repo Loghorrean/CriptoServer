@@ -8,7 +8,7 @@ export class CoinbaseProviderFactory {
 
     constructor(baseUrl: string, headers: Headers = {}) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/v2/prices/`,
+            `${baseUrl}/v2`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

@@ -8,7 +8,7 @@ export class KrakenProviderFactory {
 
     constructor(baseUrl: string, headers: Headers) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/0/public/Ticker`,
+            `${baseUrl}`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

@@ -7,7 +7,7 @@ export class KucoinProvider {
     ) {}
 
     getKucoinResult(symbol: string): Promise<ApiKucoinResult> {
-        return this.apiClient.get("", {symbol}).catch(() => {
+        return this.apiClient.get("/market/orderbook/level1", {symbol}).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

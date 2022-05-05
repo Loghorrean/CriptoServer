@@ -1,8 +1,4 @@
-export * from "./clients/ApiClientFactory";
-export * from "./clients/ApiClientFactoryDecorator";
-export * from "./clients/ApiClientFactoryInterface";
-export * from "./clients/LoggingApiClientFactory";
-export * from "./clients/RacingApiClientFactory";
+export * from './clients';
 
 export * from "./BinanceProviderFactory";
 export * from "./CoinbaseProviderFactory";

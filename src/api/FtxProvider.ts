@@ -6,7 +6,7 @@ export class FtxProvider {
     {}
 
     public getFtxResult(endpoint: string): Promise<ApiFtxResult> {
-        return this.apiClient.get(endpoint).catch(() => {
+        return this.apiClient.get(`/markets/${endpoint}`).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

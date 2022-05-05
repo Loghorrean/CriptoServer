@@ -7,15 +7,7 @@ export class CoinbaseProvider {
     ) {}
 
     getCoinbaseSellResult(currency: string): Promise<ApiCoinbaseResult> {
-        return this.apiClient.get(`${currency}/sell`, {currency: "USD"}).catch(() => {
-            return new Promise<void>((res) => {
-                res();
-            });
-        });
-    }
-
-    getCoinbaseBuyResult(currency: string): Promise<ApiCoinbaseResult> {
-        return this.apiClient.get(`${currency}/buy`, {currency: "USD"}).catch(() => {
+        return this.apiClient.get(`prices/${currency}/sell`, {currency: "USD"}).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

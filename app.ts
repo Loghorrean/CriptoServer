@@ -1,13 +1,13 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: `${__dirname}/.env.local` });
-dotenv.config({ path: `${__dirname}/.env` });
-
 import express from 'express';
 import {ResultTransformer} from "./src/utils/transform/ResultTransformer";
 import {createProviders} from "./src/di";
 import * as currencies from "./src/api/enums";
 import {setCorsHeaders} from "./src/middleware";
 import appConfig from "./src/config/app";
+
+const dotenv = require('dotenv');
+dotenv.config({ path: `${__dirname}/.env.local` });
+dotenv.config({ path: `${__dirname}/.env` });
 
 const app = express();
 const port = appConfig.appPort;
@@ -42,7 +42,7 @@ app.get('/prices/:currency', async (req, res) => {
     ) => {
         return { binance, kraken, ftx, coinbase, kucoin, huobi, bitfinex, gemini }
     });
-    res.status(200).json(transformer.transformResult(results));
+    res.status(200).json(transformer.transformResult(results, requestCurrency));
 })
 
 app.listen(port, () => {

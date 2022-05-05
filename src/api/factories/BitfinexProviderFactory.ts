@@ -7,7 +7,7 @@ export class BitfinexProviderFactory {
 
     constructor(baseUrl: string, headers: Headers) {
         this.apiClientFactory = new ApiClientFactory(
-            `${baseUrl}/v2/ticker`,
+            `${baseUrl}/v2`,
             headers
         );
         this.apiClientFactory = new RacingApiClientFactory(this.apiClientFactory);

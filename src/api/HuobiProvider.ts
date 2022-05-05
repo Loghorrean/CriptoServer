@@ -7,7 +7,7 @@ export class HuobiProvider {
     ) {}
 
     getHuobiResult(symbol: string): Promise<ApiHuobiResult> {
-        return this.apiClient.get("", {symbol: symbol}).catch(() => {
+        return this.apiClient.get("/market/trade", {symbol: symbol}).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });

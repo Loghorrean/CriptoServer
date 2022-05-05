@@ -10,9 +10,9 @@ import {DataResponse} from "../../api/models/DataResponse";
 import {ApiCoinbaseResult} from "../../api";
 
 export class ResultTransformer {
-    public transformResult(apiDataResponse: ApiDataResponse): DataResponse {
+    public transformResult(apiDataResponse: ApiDataResponse, requestCurrency: string): DataResponse {
         return {
-            kraken: ResultTransformer.transformKrakenResult(apiDataResponse.kraken),
+            kraken: ResultTransformer.transformKrakenResult(apiDataResponse.kraken, requestCurrency),
             ftx: ResultTransformer.transformFtxResult(apiDataResponse.ftx),
             binance: ResultTransformer.transformBinanceResult(apiDataResponse.binance),
             coinbase: ResultTransformer.transformCoinbaseResult(apiDataResponse.coinbase),
@@ -23,11 +23,12 @@ export class ResultTransformer {
         }
     }
 
-    private static transformKrakenResult(apiKrakenResult: ApiKrakenResult | void): Money {
+    private static transformKrakenResult(apiKrakenResult: ApiKrakenResult | void, requestCurrency: string): Money {
         if (!apiKrakenResult) {
             return ResultTransformer.getErroredMoney();
         }
-        const money = parseFloat(apiKrakenResult.result.XXBTZUSD.a[0]);
+        const currencyMap = { "BTC": "XXBTZUSD", "ETH": "XETHZUSD" }
+        const money = parseFloat(apiKrakenResult.result[currencyMap[requestCurrency]].a[0]);
         return {
             sell: parseFloat(money.toFixed(2))
         }

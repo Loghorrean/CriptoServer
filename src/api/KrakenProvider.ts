@@ -6,7 +6,7 @@ export class KrakenProvider {
     {}
 
     public getKrakenResult(pair: string): Promise<ApiKrakenResult> {
-        return this.apiClient.get("", {pair}).catch(() => {
+        return this.apiClient.get("/0/public/Ticker", {pair}).catch(() => {
             return new Promise<void>((res) => {
                 res();
             });
